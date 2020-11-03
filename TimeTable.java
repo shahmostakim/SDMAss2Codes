@@ -51,18 +51,11 @@ public class TimeTable {
 	}
 	
 	// search for a specific connection 
-	public boolean findConnection(LocalDate date, LocalTime time, Station origin, Station destination) {
+	public Connection findConnection(LocalDate date, LocalTime time, Station origin, Station destination) {
 		boolean response = true; // initial guess
+		Connection connection = null;
 		
 		for(Connection entry : t_table) {
-			//System.out.println(entry.origin.getStationName()+" to "+entry.destination.getStationName());
-			
-			/*
-			if(date!=entry.date || time!=entry.time || origin!=entry.origin || destination!=entry.destination) {
-				response = false;
-			} 
-			*/
-			
 			response = true; // initial guess 
 			//System.out.println("=> comparing input origin "+origin.getStationName()+" with timetable "+entry.origin.getStationName());
 			
@@ -85,13 +78,13 @@ public class TimeTable {
 			
 			// check flag status before going to next iteration
 			// if still response=true then we got the connection so now end searching 
-			 
 			if(response==true) {
 				//System.out.println("--Connection found for the given criteria!--");
+				connection = entry;
 				break;
 			}
 		}
 		
-		return response;
+		return connection;
 	}
 }

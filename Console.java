@@ -16,29 +16,24 @@ public class Console {
 		Station destination = new Station(4, "parc");
 		
 		// search for the connection 
-		boolean isConnectionAvailable = makeNewBooking(passenger, date, departure, origin, destination);
-		
-		System.out.println("");
-		if(isConnectionAvailable) {
-			System.out.println("connection found!");
-		}else {
-			System.out.println("connection not found");
-		}
+		Connection connection = makeNewBooking(passenger, date, departure, origin, destination);
 		
 	}
 	
-	static boolean makeNewBooking(Passenger passenger, LocalDate date, LocalTime departure, Station origin, Station destination) {
+	static Connection makeNewBooking(Passenger passenger, LocalDate date, LocalTime departure, Station origin, Station destination) {
 		
-		boolean connection = t.findConnection(date, departure, origin, destination);
+		Connection connection = t.findConnection(date, departure, origin, destination);
 		
-		 
-		if(connection) {
-			//System.out.println("connection found!");
-			return true;
+		// checks if connection was found  
+		if(connection!=null) {
+			System.out.println("connection found!");
+			System.out.println("Creating tickets");
+			return connection;
 		}
 		else {
-			//System.out.println("connection not found");
-			return false;
+			System.out.println("connection not found");
+			System.out.println("Executing failure scenario");
+			return null;
 		}
 		
 			
