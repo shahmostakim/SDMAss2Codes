@@ -14,28 +14,35 @@ public class Console {
 		LocalTime departure = LocalTime.parse("05:30");
 		Station origin = new Station(3, "uqam");
 		Station destination = new Station(4, "parc");
-		
+	
 		// search for the connection 
-		Connection connection = makeNewBooking(passenger, date, departure, origin, destination);
+		boolean connectionFound = makeNewBooking(passenger, date, departure, origin, destination);
 		
 	}
 	
-	static Connection makeNewBooking(Passenger passenger, LocalDate date, LocalTime departure, Station origin, Station destination) {
+	static boolean makeNewBooking(Passenger passenger, LocalDate date, LocalTime departure, Station origin, Station destination) {
 		
 		Connection connection = t.findConnection(date, departure, origin, destination);
 		
 		// checks if connection was found  
 		if(connection!=null) {
 			System.out.println("connection found!");
-			System.out.println("Creating tickets");
-			return connection;
+			System.out.println("Creating tickets...");
+			
+			// execution of ticket creation process 
+			RailCompany.makeBooking(passenger, connection);
+			
+			// print all the tickets created so far
+			for(Ticket t : Tickets.ticketList) {
+				System.out.println("Ticket issued for passenger: "+t.getPassenger().getName());
+			}
+			return true;
 		}
 		else {
 			System.out.println("connection not found");
 			System.out.println("Executing failure scenario");
-			return null;
+			return false;
 		}
-		
 			
 	}
 }
