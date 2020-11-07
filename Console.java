@@ -16,7 +16,7 @@ public class Console {
 		Station destination = new Station(4, "parc");
 	
 		// search for the connection 
-		boolean connectionFound = makeNewBooking(passenger, date, departure, origin, destination);
+		boolean connectionFound = makeNewBooking2(passenger, date, departure, origin, destination);
 		
 	}
 	
@@ -34,15 +34,44 @@ public class Console {
 			
 			// print all the tickets created so far
 			for(Ticket t : Tickets.ticketList) {
-				System.out.println("Ticket issued for passenger: "+t.getPassenger().getName());
+				System.out.println("Ticket issued for passenger: "+t.getPassenger().getName()+" for station "+connection.origin.getStationName()+" to station "+connection.destination.getStationName());
 			}
 			return true;
 		}
 		else {
-			System.out.println("connection not found");
-			System.out.println("Executing failure scenario");
+			System.out.println("No connection available for user. Please try another search...");
+			System.out.println("Executing failure scenario...");
 			return false;
 		}
 			
+	}
+	
+	// alternate implementation with try catch 
+	static boolean makeNewBooking2(Passenger passenger, LocalDate date, LocalTime departure, Station origin, Station destination) {
+		
+		Connection connection = t.findConnection(date, departure, origin, destination);
+		
+		try {
+			Station startingPoint = connection.origin; // if connection is null it should throw exception
+			
+			System.out.println("connection found!");
+			System.out.println("Creating tickets...");
+			
+			// execution of ticket creation process 
+			RailCompany.makeBooking(passenger, connection);
+			
+			// print all the tickets created so far
+			for(Ticket t : Tickets.ticketList) {
+				//System.out.println("Ticket issued for passenger: "+t.getPassenger().getName());
+				System.out.println("Ticket issued for passenger: "+t.getPassenger().getName()+" for station "+connection.origin.getStationName()+" to station "+connection.destination.getStationName());
+			}
+			return true;
+			
+		}catch(Exception e) {
+			System.out.println("No connection available for user. Please try another search...\"");
+			System.out.println("Executing failure scenario...");
+			return false;
+		}
+ 
 	}
 }
