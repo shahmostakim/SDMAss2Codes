@@ -3,10 +3,33 @@ import java.time.*;
 import com.railway.org.Station;
 public class Connection {
 	
-	public Station origin;
-	public Station destination;
-	public LocalDate date;
-	public LocalTime time;
-	//private LocalDate date = LocalDate.parse("2021-02-20");
-	//private LocalTime time = LocalTime.parse("06:30");
+	private Station origin;
+	private Station destination;
+	private LocalDate date;
+	private LocalTime time;
+	
+	public Connection(Station origin, Station destination, LocalDate date, LocalTime time) {
+		this.origin = origin;
+		this.destination = destination;
+		this.date = date;
+		this.time = time;
+	}
+
+	public Station getOrigin() {
+		return this.origin;
+	}
+
+	public Station getDestination() {
+		return this.destination;
+	}
+
+	public LocalDate getDate() {
+		return this.date;
+	}
+
+	public LocalTime getTime() {
+		return this.time;
+	}
+	
+	
 }
