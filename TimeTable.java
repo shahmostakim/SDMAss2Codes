@@ -15,8 +15,8 @@ public class TimeTable {
 	}
 	
 	// search for a specific connection 
-	public Connection findConnection(LocalDate date, LocalTime time, Station origin, Station destination) {
-		boolean response = true; // initial guess
+	public Connection findConnection(LocalDate date, LocalTime time, Station origin, Station destination) throws ConnectionNotFoundException {
+		boolean response = false; // initial guess
 		Connection connection = null;
 		
 		for(Connection entry : t_table) {
@@ -42,7 +42,8 @@ public class TimeTable {
 				break;
 			}
 		}
-		
+		if(response==false)
+			throw new ConnectionNotFoundException(); 
 		return connection;
 	}
 }

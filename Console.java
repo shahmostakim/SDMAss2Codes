@@ -21,7 +21,7 @@ public class Console {
 		Passenger passenger = new Passenger("shakil","438-560-9981");
 		LocalDate date = LocalDate.parse("2021-02-21");
 		LocalTime departure = LocalTime.parse("05:30");
-		Station origin = new Station(3, "uqam");
+		Station origin = new Station(3, "uqsam");
 		Station destination = new Station(4, "parc");
 	
 		// search for the connection 
@@ -70,10 +70,9 @@ public class Console {
 	 
 	private boolean makeNewBooking(Passenger passenger, LocalDate date, LocalTime departure, Station origin, Station destination) {
 		
-		Connection connection = t.findConnection(date, departure, origin, destination);
-		
 		try {
-			Station startingPoint = connection.getOrigin(); // if connection is null it should throw exception
+			Connection connection = t.findConnection(date, departure, origin, destination);
+			//Station startingPoint = connection.getOrigin(); // if connection is null it should throw exception
 			
 			System.out.println("connection found!");
 			System.out.println("Creating ticket...");
@@ -88,7 +87,7 @@ public class Console {
 			}
 			return true;
 			
-		}catch(Exception e) {
+		}catch(ConnectionNotFoundException ce) {
 			System.out.println("No connection available for user. Please try another search...\"");
 			System.out.println("Executing failure procedure...");
 			return false;
