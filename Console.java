@@ -21,7 +21,7 @@ public class Console {
 		Passenger passenger = new Passenger("shakil","438-560-9981");
 		LocalDate date = LocalDate.parse("2021-02-21");
 		LocalTime departure = LocalTime.parse("05:30");
-		Station origin = new Station(3, "uqsam");
+		Station origin = new Station(3, "uqam");
 		Station destination = new Station(4, "parc");
 	
 		// search for the connection 
